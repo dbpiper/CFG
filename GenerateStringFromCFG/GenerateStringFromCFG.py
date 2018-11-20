@@ -40,7 +40,8 @@ def generate_string(grammar_parser):
 
 
 generated_string = generate_string(gr)
-while len(generated_string) > max_len:
-    generated_string = generate_string(gr)
+if max_len > 0:
+    while len(generated_string) > max_len:
+        generated_string = generate_string(gr)
 
 print(' '.join(generated_string))
