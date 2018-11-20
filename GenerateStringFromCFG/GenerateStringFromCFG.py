@@ -1,10 +1,17 @@
 from nltk import CFG, ChartParser
 from random import choice
+import configparser
 
 # based on this example:
 #   https://stackoverflow.com/questions/603687/how-do-i-generate-sentences-from-a-formal-grammar/3292027#3292027
 
-MAX_LEN = 7
+
+cfg_file = open('./config/CFG.txt', 'r')
+config = configparser.ConfigParser()
+config.read('./config/config.ini')
+
+max_len = int(float(config['default']['max_len']))
+
 
 def produce(cfg, symbol):
 
@@ -20,13 +27,7 @@ def produce(cfg, symbol):
 
 
 # using A instead of S' because CFG.fromstring rejects S'
-grammar = CFG.fromstring('''
-A -> S
-S -> '(' L ')'
-S -> 'x'
-L -> S
-L -> L ',' S
-''')
+grammar = CFG.fromstring(cfg_file.read())
 
 parser = ChartParser(grammar)
 
@@ -39,8 +40,7 @@ def generate_string(grammar_parser):
 
 
 generated_string = generate_string(gr)
-while len(generated_string) > MAX_LEN:
+while len(generated_string) > max_len:
     generated_string = generate_string(gr)
 
-print(generated_string)
 print(' '.join(generated_string))
