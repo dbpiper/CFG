@@ -6,8 +6,13 @@ Tools related to CFGs
 
 Functionality provided by the GenerateStringFromCFG\GenerateStringFromCFG.py file.
 
-Requires Python 3.
+Requires Python 3 and nltk.
 
+Once Python 3 and pip are installed you can install nltk like this:
+
+```
+pip install nltk
+```
 
 ## CFG input
 Put the CFG in the GenerateStringFromCFG\config\CFG.txt file, following the
